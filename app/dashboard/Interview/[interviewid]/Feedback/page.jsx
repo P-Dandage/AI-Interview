@@ -51,24 +51,19 @@ const RadarChart = ({ data }) => {
 
   return (
     <svg width={size} height={size} style={{ overflow: "visible" }}>
-      {/* Grid */}
       {Array.from({ length: levels }).map((_, i) => (
         <polygon key={i} points={gridPoints(i)}
           fill="none" stroke="#e0e7ff" strokeWidth="1" />
       ))}
-      {/* Axes */}
       {axes.map((a, i) => {
         const end = polarToXY(a.angle, r);
         return <line key={i} x1={cx} y1={cy} x2={end.x} y2={end.y} stroke="#c7d2fe" strokeWidth="1" />;
       })}
-      {/* Data */}
       <polygon points={dataPoints} fill="rgba(99,102,241,0.25)" stroke="#6366f1" strokeWidth="2.5" strokeLinejoin="round" />
-      {/* Points */}
       {axes.map((a, i) => {
         const pt = polarToXY(a.angle, r * (a.value / 10));
         return <circle key={i} cx={pt.x} cy={pt.y} r="4" fill="#6366f1" stroke="white" strokeWidth="2" />;
       })}
-      {/* Labels */}
       {axes.map((a, i) => {
         const pt = polarToXY(a.angle, r + 22);
         return (
@@ -82,31 +77,45 @@ const RadarChart = ({ data }) => {
   );
 };
 
-// ── Circular progress ring ─────────────────────────────────────────────────
-const Ring = ({ value, max, size = 90, stroke = 7, color }) => {
-  const r = (size - stroke) / 2;
+// ── Circular progress ring WITH centre symbol ─────────────────────────────
+const Ring = ({ value, max, size = 90, stroke = 7, color, symbol }) => {
+  const r    = (size - stroke) / 2;
   const circ = 2 * Math.PI * r;
-  const fill = ((value / max) * circ);
+  const fill = (value / max) * circ;
   return (
-    <svg width={size} height={size}>
-      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e0e7ff" strokeWidth={stroke} />
-      <circle cx={size/2} cy={size/2} r={r} fill="none"
-        stroke={color} strokeWidth={stroke}
-        strokeDasharray={`${fill} ${circ}`}
-        strokeLinecap="round"
-        transform={`rotate(-90 ${size/2} ${size/2})`}
-        style={{ transition: "stroke-dasharray 0.8s ease" }}
-      />
-    </svg>
+    <div style={{ position: "relative", width: size, height: size }}>
+      <svg width={size} height={size}>
+        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e0e7ff" strokeWidth={stroke} />
+        <circle cx={size/2} cy={size/2} r={r} fill="none"
+          stroke={color} strokeWidth={stroke}
+          strokeDasharray={`${fill} ${circ}`}
+          strokeLinecap="round"
+          transform={`rotate(-90 ${size/2} ${size/2})`}
+          style={{ transition: "stroke-dasharray 0.8s ease" }}
+        />
+      </svg>
+      {symbol && (
+        <div style={{
+          position:  "absolute",
+          top:       "50%",
+          left:      "50%",
+          transform: "translate(-50%, -50%)",
+          fontSize:  20,
+          lineHeight: 1,
+        }}>
+          {symbol}
+        </div>
+      )}
+    </div>
   );
 };
 
 // ── Main Feedback Component ────────────────────────────────────────────────
 function Feedback({ params }) {
-  const [all, setAll]         = useState([]);
-  const [latest, setLatest]   = useState([]);
-  const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [all, setAll]           = useState([]);
+  const [latest, setLatest]     = useState([]);
+  const [showAll, setShowAll]   = useState(false);
+  const [loading, setLoading]   = useState(true);
   const [expanded, setExpanded] = useState(null);
   const router = useRouter();
 
@@ -128,12 +137,11 @@ function Feedback({ params }) {
     finally     { setLoading(false); }
   };
 
-  const displayed = showAll ? all : latest;
+  const displayed     = showAll ? all : latest;
   const overallRating = avg(latest);
   const status        = getStatus(overallRating);
   const chance        = overallRating >= 8 ? 92 : overallRating >= 6.5 ? 72 : overallRating >= 5 ? 52 : 28;
 
-  // Radar data — derive from latest answers
   const radarData = [
     { label: "Clarity",     value: Math.min(10, Math.max(1, overallRating * 0.95 + (Math.random()-0.5))) },
     { label: "Depth",       value: Math.min(10, Math.max(1, overallRating * 0.9  + (Math.random()-0.5))) },
@@ -147,7 +155,6 @@ function Feedback({ params }) {
       const f = JSON.parse(raw);
       if (!f.strengths) return { strengths: [], improvements: [], suggestions: [] };
 
-      // Normalise improvements — handle both old string[] and new {point, studyLinks}[]
       const raw_improv = f.improvements || f.areas_for_improvement || [];
       f.improvements = raw_improv.map(item =>
         typeof item === "string"
@@ -218,15 +225,17 @@ function Feedback({ params }) {
       {/* ── Score Cards Row ── */}
       <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16, marginBottom:28 }}>
         {[
-          { icon: <Target size={18} color="#6366f1"/>, label:"Overall Score", value: overallRating.toFixed(1)+"/10", sub:"AI Evaluation", color:"#6366f1" },
-          { icon: <Zap size={18} color="#f59e0b"/>,    label:"Questions Done", value: latest.length, sub:"Answered", color:"#f59e0b" },
-          { icon: <Trophy size={18} color="#22c55e"/>,  label:"Selection Chance", value: chance+"%", sub:"Estimated", color:"#22c55e" },
-        ].map(({ icon, label, value, sub, color }) => (
+          { icon: <Target size={18} color="#6366f1"/>, label:"Overall Score",    value: overallRating.toFixed(1)+"/10", sub:"AI Evaluation", color:"#6366f1", symbol:"🎯" },
+          { icon: <Zap    size={18} color="#f59e0b"/>, label:"Questions Done",   value: latest.length,                  sub:"Answered",      color:"#f59e0b", symbol:"📋" },
+          { icon: <Trophy size={18} color="#22c55e"/>, label:"Selection Chance", value: chance+"%",                     sub:"Estimated",     color:"#22c55e", symbol:"✅" },
+        ].map(({ icon, label, value, sub, color, symbol }) => (
           <div key={label} style={{ background:"white", border:"1.5px solid #e8edf8", borderRadius:18, padding:"22px 20px", textAlign:"center" }}>
             <div style={{ display:"flex", justifyContent:"center", marginBottom:12 }}>
-              <Ring value={typeof value === "string" ? parseFloat(value) : value}
+              <Ring
+                value={typeof value === "string" ? parseFloat(value) : value}
                 max={label === "Overall Score" ? 10 : label === "Selection Chance" ? 100 : latest.length}
                 color={color}
+                symbol={symbol}
               />
             </div>
             <div style={{ fontFamily:"Sora,sans-serif", fontSize:22, fontWeight:800, color:"#05264e" }}>{value}</div>
@@ -275,7 +284,7 @@ function Feedback({ params }) {
 
         <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
           {displayed.map((item, i) => {
-            const r = Number(item.rating) || 0;
+            const r  = Number(item.rating) || 0;
             const fb = parseFeedback(item.feedback);
             const open = expanded === i;
             return (
@@ -335,18 +344,18 @@ function Feedback({ params }) {
                         <div style={{ background:"#fff7ed", border:"1px solid #fed7aa", borderRadius:12, padding:16 }}>
                           <p style={{ fontFamily:"Sora,sans-serif", fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:1, color:"#c2410c", marginBottom:10 }}>⚠️ Areas to Improve</p>
                           <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
-                            {fb.improvements.map((item, j) => (
+                            {fb.improvements.map((improv, j) => (
                               <div key={j} style={{ background:"white", border:"1px solid #fed7aa", borderRadius:10, padding:"12px 14px" }}>
                                 <p style={{ fontFamily:"DM Sans,sans-serif", fontSize:13.5, color:"#7c2d12", lineHeight:1.55, margin:"0 0 8px" }}>
-                                  {item.point}
+                                  {improv.point}
                                 </p>
-                                {item.studyLinks?.length > 0 && (
+                                {improv.studyLinks?.length > 0 && (
                                   <div>
                                     <p style={{ fontFamily:"Sora,sans-serif", fontSize:10, fontWeight:700, textTransform:"uppercase", letterSpacing:1, color:"#9a3412", marginBottom:5 }}>
                                       📚 Study Resources
                                     </p>
                                     <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
-                                      {item.studyLinks.map((url, k) => {
+                                      {improv.studyLinks.map((url, k) => {
                                         let domain = "";
                                         try { domain = new URL(url).hostname.replace("www.", ""); } catch { domain = url.slice(0,30); }
                                         return (
