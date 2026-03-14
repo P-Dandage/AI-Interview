@@ -1,0 +1,126 @@
+.about-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.section-label-brand {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #6366f1;
+  margin-bottom: 16px;
+}
+
+.about-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 800;
+  color: #05264e;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.about-heading-accent {
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-sub {
+  font-family: 'DM Sans', sans-serif;
+  color: #64748b;
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto 56px;
+  line-height: 1.65;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.team-card {
+  background: white;
+  border: 1.5px solid #e8edf8;
+  border-radius: 20px;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  border-color: #a5b4fc;
+  box-shadow: 0 16px 48px rgba(99,102,241,0.15);
+}
+
+.team-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: white;
+  margin-bottom: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.team-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #05264e;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.team-role {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #6366f1;
+  font-weight: 500;
+}
+
+.team-socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.social-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1.5px solid #e8edf8;
+  color: #64748b;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.social-btn:hover {
+  color: #6366f1;
+  border-color: #a5b4fc;
+  background: #eef2ff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .team-grid { grid-template-columns: 1fr; } }

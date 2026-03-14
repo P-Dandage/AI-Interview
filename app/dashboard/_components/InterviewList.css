@@ -1,0 +1,30 @@
+
+.interview-list-container {
+    padding: 20px;
+  }
+  
+  .interview-list-title {
+    font-size: 1.3rem; 
+    font-weight: 600; 
+    margin-bottom: 30px;
+    color: rgb(5, 38, 78);
+  }
+  
+ 
+  .interview-list-grid {
+    display: grid;
+    gap: 20px; 
+    margin-top: 10px; 
+    grid-template-columns: repeat(1, 1fr); 
+  
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+  
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr); 
+    }
+  }
+  

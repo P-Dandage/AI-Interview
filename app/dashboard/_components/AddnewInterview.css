@@ -1,0 +1,108 @@
+.add-new-card {
+  background: linear-gradient(135deg, #f8faff, #eef2ff);
+  border: 2px dashed #a5b4fc;
+  border-radius: 18px;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-height: 160px;
+  justify-content: center;
+}
+
+.add-new-card:hover {
+  border-color: #6366f1;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(99,102,241,0.15);
+}
+
+.add-new-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.add-new-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e1b4b;
+}
+
+.add-new-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Dialog form */
+.dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e1b4b;
+}
+
+.dialog-title-icon { color: #6366f1; }
+
+.interview-form { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+
+.form-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+
+.field-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.field-input {
+  font-family: 'DM Sans', sans-serif !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.start-btn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+  border-radius: 10px !important;
+  font-family: 'Sora', sans-serif !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.35) !important;
+}
+
+.start-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(99,102,241,0.45) !important;
+}

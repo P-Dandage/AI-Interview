@@ -1,0 +1,259 @@
+/* ── Page ─────────────────────────────────────────────────────────────────── */
+.hiw-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 0 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ── Intro Hero ───────────────────────────────────────────────────────────── */
+.hiw-intro {
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  border-radius: 24px;
+  padding: 44px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ambient orb */
+.hiw-intro::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(129,140,248,0.15), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hiw-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #818cf8;
+  margin-bottom: 14px;
+}
+
+.hiw-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: white;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.hiw-title span {
+  background: linear-gradient(135deg, #a5b4fc, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hiw-intro-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  max-width: 720px;
+}
+
+.hiw-intro-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hiw-tag {
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  color: #a5b4fc;
+  border: 1px solid rgba(165, 180, 252, 0.3);
+  padding: 5px 13px;
+  border-radius: 99px;
+}
+
+/* ── Sections ─────────────────────────────────────────────────────────────── */
+.hiw-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hiw-section-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #6366f1;
+}
+
+.hiw-section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  color: #05264e;
+  letter-spacing: -0.8px;
+  margin-bottom: 4px;
+}
+
+.hiw-section-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+/* ── Steps ────────────────────────────────────────────────────────────────── */
+.hiw-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 16px;
+}
+
+.hiw-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.hiw-step-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 52px;
+}
+
+.hiw-step-num {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  flex-shrink: 0;
+}
+
+.hiw-step-line {
+  width: 2px;
+  height: 56px;
+  background: linear-gradient(to bottom, #6366f1, #c7d2fe);
+  margin-top: 6px;
+  border-radius: 99px;
+}
+
+.hiw-step-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: white;
+  border: 1.5px solid #e8edf8;
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  flex: 1;
+  transition: all 0.25s ease;
+}
+
+.hiw-step-card:hover {
+  border-color: #a5b4fc;
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.11);
+  transform: translateX(5px);
+}
+
+.hiw-step-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.hiw-step-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #05264e;
+  margin-bottom: 5px;
+}
+
+.hiw-step-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Why Grid ─────────────────────────────────────────────────────────────── */
+.hiw-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.hiw-why-card {
+  background: white;
+  border: 1.5px solid #e8edf8;
+  border-radius: 18px;
+  padding: 24px 20px;
+  transition: all 0.25s ease;
+}
+
+.hiw-why-card:hover {
+  border-color: #a5b4fc;
+  box-shadow: 0 8px 28px rgba(99, 102, 241, 0.12);
+  transform: translateY(-4px);
+}
+
+.hiw-why-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.hiw-why-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #05264e;
+  margin-bottom: 7px;
+}
+
+.hiw-why-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hiw-intro { padding: 32px 24px; }
+  .hiw-why-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 520px) {
+  .hiw-step-left { display: none; }
+  .hiw-step-card { margin-bottom: 12px; }
+  .hiw-why-grid { grid-template-columns: 1fr; }
+}
